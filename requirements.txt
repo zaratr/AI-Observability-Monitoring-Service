@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy[asyncio]
+aiosqlite
+pydantic
+prometheus_client
+httpx
+pytest
+pytest-asyncio
