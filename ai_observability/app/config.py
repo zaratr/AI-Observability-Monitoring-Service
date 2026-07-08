@@ -4,7 +4,8 @@ from __future__ import annotations
 from functools import lru_cache
 from typing import Optional
 
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
@@ -13,6 +14,8 @@ class Settings(BaseSettings):
     app_name: str = Field("AI Observability Service", env="APP_NAME")
     database_url: str = Field("sqlite+aiosqlite:///./observability.db", env="DATABASE_URL")
     llm_provider: str = Field("dummy", env="LLM_PROVIDER")
+    # Base URL for the Ollama provider (used when llm_provider="ollama").
+    ollama_base_url: str = Field("http://localhost:11434", env="OLLAMA_BASE_URL")
     enable_privacy_masking: bool = Field(True, env="ENABLE_PRIVACY_MASKING")
     max_stored_chars_per_field: int = Field(500, env="MAX_STORED_CHARS_PER_FIELD")
     drift_threshold: float = Field(0.8, env="DRIFT_THRESHOLD")

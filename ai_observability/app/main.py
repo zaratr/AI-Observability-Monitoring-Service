@@ -11,6 +11,7 @@ from prometheus_client import generate_latest
 from .config import get_settings
 from .core.logging import setup_logging
 from .llm.dummy_client import DummyLLMClient
+from .llm.ollama_client import OllamaLLMClient
 from .llm.openai_client import OpenAILLMClient
 from .observability import metrics
 from .observability.evals import run_evals_for_request
@@ -40,6 +41,8 @@ def get_llm_client() -> LLMClient:
     settings = get_settings()
     if settings.llm_provider == "openai":
         return OpenAILLMClient()
+    if settings.llm_provider == "ollama":
+        return OllamaLLMClient(base_url=settings.ollama_base_url)
     return DummyLLMClient()
 
 
